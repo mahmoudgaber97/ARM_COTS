@@ -12,24 +12,28 @@ void MSTK_voidInit(u8 u8copy_clk){
 //SET_BIT(SYS_ptr->STK_CTRL,1);
 
 SYS_ptr->STK_CTRL|= u8copy_clk<<2;
-
+//SET_BIT(SYS_ptr->STK_CTRL,1);
 
 }
 
+/*one tick=1 microsecond*/
 
-
-void MSTK_VoidBasyWait(u32 u32Copy_Load){
-
+void MSTK_VoidBasyWait(u32  u32Copy_Load){
+	SYS_ptr->STK_LOAD=0x00000000;
 /*load value*/
 
 SYS_ptr->STK_LOAD=u32Copy_Load;
-/*clear VAL_Register*/
-SYS_ptr->STK_VAL=0;
-SET_BIT(SYS_ptr->STK_CTRL,1);
 /*enable counter*/
-SYS_ptr->STK_LOAD;
+
+
+
+	//SYS_ptr->STK_VAL=0;
+
 SET_BIT(SYS_ptr->STK_CTRL,0);
-while(!MSTK_voidGetFlag());
+while(!GET_BIT( SYS_ptr->STK_CTRL ,16 ));
+
+
+
 
 }
 
