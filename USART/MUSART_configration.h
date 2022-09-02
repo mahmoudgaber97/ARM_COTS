@@ -118,5 +118,8 @@ LIN_mode_enabled
 
 #define Error_interrupt_enable  Error_Interrupt_inhibited 
 
+#define TransmitterE Transmitter_enabled
+
+#define ReceiverEnabled Receiver_enabled
 
 #endif

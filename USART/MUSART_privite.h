@@ -18,7 +18,7 @@ typedef struct{
 	
 }MUSART_REGbank;
 
-#define MUSART   ((MUSART_REGbank*)0x40013800)
+#define MUSART   ((volatile MUSART_REGbank*)0x40013800)
 
 
 
@@ -63,7 +63,7 @@ typedef struct{
 #define Transmitter_disabled  0
 #define Transmitter_enabled   1
 
-#define Receiver_sdisabled    0
+#define Receiver_disable     0
 #define Receiver_enabled      1
 
 #define Receiver_active_mode  0

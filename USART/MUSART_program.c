@@ -8,6 +8,7 @@
 
 void MUSARTSetvoid_boudRate(f32 f32boudRate)
 {
+	SET_BIT(MUSART->USART_CR1,13);
 	
 	f32 f32FltNum=(f32)f32boudRate-(u32)f32boudRate;
 	f32FltNum *=16;
@@ -20,6 +21,7 @@ void MUSARTSetvoid_boudRate(f32 f32boudRate)
 void MUSARTIntivoid(void){
 	/*make USART Enable or disable */
 #if USART_State == UE_USART_enable
+	MUSART->USART_SR=0;
 	SET_BIT(MUSART->USART_CR1,13);
 
 #elif USART_State == UE_USART_disable
@@ -79,16 +81,16 @@ void MUSARTIntivoid(void){
 	SET_BIT(MUSART->USART_CR1,5);
 #endif
 /*enable or disable  transmitter mode*/
-#if TransmitterE==Transmitter_disabled
+#if TransmitterE==Transmitter_enabled
 	SET_BIT(MUSART->USART_CR1,3);
 
-#elif TransmitterE==Receiver_enabled
+#elif TransmitterE==Transmitter_disabled
 	CLEAR_BIT(MUSART->USART_CR1,3);
 #endif
 #if ReceiverEnabled == Receiver_enabled
 	SET_BIT(MUSART->USART_CR1,2);
 #elif
-	ReceiverEnabled == Receiver_enabled
+	ReceiverEnabled == Receiver_disable
 	CLEAR_BIT(MUSART->USART_CR1,2);
 #endif
 
@@ -99,11 +101,12 @@ set_registerValue(STOP_Fram,12,MUSART->USART_CR2); /* sets STOP_Fram Value in bi
 }
 
 
-void Send_u8Char(u8 u8Char)
+void Send_u8Char(u8  u8Char)
 {
-
 MUSART->USART_DR=u8Char;
+MUSART->USART_DR;
 while(!GET_BIT(MUSART->USART_SR,6));
+MUSART->USART_DR;
 CLEAR_BIT(MUSART->USART_SR,6);
 
 
