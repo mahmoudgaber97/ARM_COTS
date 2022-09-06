@@ -35,7 +35,7 @@
  SW_Slave_MangerD  
  SW_Slave_MangerE 
  */
- #define SSM   SW_Slave_MangerD  
+ #define SSM   SW_Slave_MangerE
  /*
  # MSB  
  # LSB 
@@ -77,14 +77,14 @@
  CPOL_idel_low 
  CPOL_idel_high
 */
-#define  CPOL  CPOL_idel_low 
+#define  CPOL  CPOL_idel_high
  /*select phase */
  /*
  CPHA_First_read  
  CPHA_First_write
 */ 
 
-#define CPHA CPHA_First_read 
+#define CPHA CPHA_First_write
 
  /*enable interrupt if TX buffer empty*/
  /*
